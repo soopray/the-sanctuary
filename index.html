@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d0a07" />
+  <title>The Sanctuary — Scripture for Every Season</title>
+  <meta name="description" content="Find peace, hope, and guidance through scripture. Share what you're going through and discover words of comfort drawn from thousands of years of wisdom." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The Sanctuary — Find Peace, Hope & Guidance" />
+  <meta property="og:description" content="Share what's on your heart and discover words of comfort, hope, and wisdom drawn from thousands of years of scripture." />
+  <meta property="og:image" content="https://via.placeholder.com/1200x630/0d0a07/c9a84c?text=The+Sanctuary" />
+  <meta property="og:url" content="https://soopray.github.io/the-sanctuary/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Sanctuary — Find Peace, Hope & Guidance" />
+  <meta name="twitter:description" content="Share what's on your heart and discover words of comfort, hope, and wisdom." />
+  <meta name="twitter:image" content="https://via.placeholder.com/1200x630/0d0a07/c9a84c?text=The+Sanctuary" />
+
+  <!-- Favicon: simple cross SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='14' y='4' width='4' height='24' rx='1' fill='%23c9a84c'/%3E%3Crect x='6' y='11' width='20' height='4' rx='1' fill='%23c9a84c'/%3E%3C/svg%3E" />
+
+  <!-- Preconnect for Google Fonts performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES — THEME TOKENS
+    ============================================================ */
+    :root {
+      --bg-deep:    #0d0a07;
+      --bg-mid:     #13100c;
+      --bg-surface: #1a1510;
+      --bg-card:    #201a13;
+      --gold:       #c9a84c;
+      --gold-light: #e2c97e;
+      --gold-dim:   #8a6f34;
+      --cream:      #f5efe6;
+      --text-muted: #7a6a55;
+      --text-soft:  #b8a88a;
+      --border:     rgba(201,168,76,0.12);
+      --border-mid: rgba(201,168,76,0.22);
+      --glow:       rgba(201,168,76,0.08);
+      --shadow-lg:  0 24px 64px rgba(0,0,0,0.6);
+      --radius-sm:  10px;
+      --radius-md:  16px;
+      --radius-lg:  24px;
+      --transition: 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-deep);
+      color: var(--cream);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Accessibility: visible focus ring for keyboard users */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    /* ============================================================
+       AMBIENT BACKGROUND GRADIENTS
+    ============================================================ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% -10%, rgba(201,168,76,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 110%, rgba(201,168,76,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      height: 64px;
+      background: rgba(13,10,7,0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--cream);
+    }
+
+    .nav-brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .nav-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-btn {
+      background: none;
+      border: 1px solid transparent;
+      color: var(--text-soft);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all var(--transition);
+    }
+
+    .nav-btn:hover {
+      background: var(--glow);
+      border-color: var(--border-mid);
+      color: var(--gold);
+    }
+
+    .nav-btn.active {
+      background: var(--glow);
+      border-color: var(--border-mid);
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       PAGE / SECTION SYSTEM
+    ============================================================ */
+    .page {
+      display: none;
+      position: relative;
+      z-index: 1;
+      min-height: calc(100vh - 64px);
+    }
+
+    .page.active { display: block; }
+
+    /* ============================================================
+       HOME PAGE — HERO
+    ============================================================ */
+    .hero {
+      text-align: center;
+      padding: 5rem 1.5rem 3rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-soft);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 0.85rem;
+    }
+
+    .hero-inclusive {
+      font-size: 0.88rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ============================================================
+       SEARCH CARD
+    ============================================================ */
+    .search-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.04);
+      margin-bottom: 0.75rem;
+    }
+
+    .search-textarea {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--cream);
+      resize: none;
+      min-height: 90px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      line-height: 1.6;
+    }
+
+    .search-textarea::placeholder { color: var(--text-muted); }
+
+    .search-textarea:focus {
+      outline: none;
+      border-color: var(--gold-dim);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+    }
+
+    .search-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .search-btn {
+      background: linear-gradient(135deg, var(--gold-dim) 0%, var(--gold) 100%);
+      color: #0d0a07;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 1.6rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    }
+
+    .search-btn:active { transform: translateY(0); }
+
+    /* Trust bar */
+    .trust-bar {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .trust-bar span { opacity: 0.5; margin: 0 0.4em; }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin: 0 auto 3.5rem;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: bounce-soft 2.5s ease-in-out infinite;
+      cursor: default;
+    }
+
+    .scroll-indicator svg {
+      width: 20px;
+      height: 20px;
+      opacity: 0.45;
+    }
+
+    @keyframes bounce-soft {
+      0%, 100% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(5px); opacity: 1; }
+    }
+
+    /* ============================================================
+       EXAMPLE PROMPTS
+    ============================================================ */
+    .prompts-section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1.5rem 2rem;
+    }
+
+    .prompts-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 0.65rem;
+    }
+
+    .prompt-chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      font-size: 0.83rem;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.4;
+    }
+
+    .prompt-chip:hover {
+      background: var(--bg-surface);
+      border-color: var(--border-mid);
+      color: var(--cream);
+      transform: translateY(-1px);
+    }
+
+    /* Feel pills */
+    .feel-section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3.5rem;
+    }
+
+    .feel-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .feel-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .feel-pill {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .feel-pill:hover {
+      background: rgba(201,168,76,0.07);
+      border-color: var(--border-mid);
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       RESULTS PAGE
+    ============================================================ */
+    .results-header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 1.5rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-soft);
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      padding: 0.45rem 1rem;
+      transition: all var(--transition);
+      margin-bottom: 1.75rem;
+    }
+
+    .back-btn:hover {
+      border-color: var(--border-mid);
+      color: var(--cream);
+    }
+
+    .results-query-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .results-query-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .results-count {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .results-grid {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .verse-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .verse-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--gold-dim), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .verse-card:hover {
+      border-color: var(--border-mid);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
+    }
+
+    .verse-card:hover::before { opacity: 1; }
+
+    .verse-ref {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .verse-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+
+    .verse-reflection {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      line-height: 1.65;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      font-style: italic;
+    }
+
+    .verse-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .verse-action-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      padding: 0.35rem 0.85rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .verse-action-btn:hover {
+      border-color: var(--border-mid);
+      color: var(--gold);
+      background: var(--glow);
+    }
+
+    /* ============================================================
+       DAILY VERSE PAGE
+    ============================================================ */
+    .daily-page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 4rem;
+    }
+
+    .daily-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .daily-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-soft);
+      margin-bottom: 2.5rem;
+    }
+
+    .daily-card {
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(26,21,16,0.8) 100%);
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .daily-card::after {
+      content: '\201C';
+      position: absolute;
+      top: -20px;
+      right: 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10rem;
+      color: rgba(201,168,76,0.05);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .daily-verse-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--cream);
+      margin-bottom: 1.25rem;
+    }
+
+    .daily-verse-ref {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .daily-divider {
+      width: 48px;
+      height: 1px;
+      background: linear-gradient(to right, var(--gold-dim), transparent);
+      margin-bottom: 1.25rem;
+    }
+
+    .daily-reflection {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    .daily-share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-sm);
+      color: var(--text-soft);
+      font-size: 0.82rem;
+      font-family: 'Inter', sans-serif;
+      padding: 0.5rem 1.1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      margin-bottom: 3rem;
+    }
+
+    .daily-share-btn:hover {
+      border-color: var(--gold-dim);
+      color: var(--gold);
+      background: var(--glow);
+    }
+
+    /* Topics section below daily verse */
+    .topics-section {
+      margin-top: 3rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .topic-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .topic-btn:hover {
+      background: var(--bg-surface);
+      border-color: var(--border-mid);
+      transform: translateY(-1px);
+    }
+
+    .topic-icon { font-size: 1.25rem; display: block; margin-bottom: 0.4rem; }
+
+    .topic-name {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
+    }
+
+    .topic-count {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       NOTES PAGE
+    ============================================================ */
+    .notes-page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 4rem;
+    }
+
+    .notes-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .notes-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+
+    .notes-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .notes-empty {
+      background: var(--bg-card);
+      border: 1px dashed var(--border-mid);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+
+    .notes-empty-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .notes-empty-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--text-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .notes-empty-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .notes-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .note-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      position: relative;
+      transition: all var(--transition);
+    }
+
+    .note-card:hover {
+      border-color: var(--border-mid);
+      transform: translateY(-1px);
+    }
+
+    .note-ref {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .note-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+
+    .note-meta {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+    }
+
+    .note-remove {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      transition: all var(--transition);
+      line-height: 1;
+    }
+
+    .note-remove:hover {
+      color: #e07070;
+      background: rgba(224,112,112,0.08);
+    }
+
+    /* ============================================================
+       TOAST NOTIFICATION
+    ============================================================ */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 1.4rem;
+      font-size: 0.82rem;
+      color: var(--cream);
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ============================================================
+       LOADING STATE
+    ============================================================ */
+    .loading-state {
+      text-align: center;
+      padding: 4rem 1.5rem;
+    }
+
+    .loading-icon {
+      font-size: 2rem;
+      animation: pulse-glow 1.5s ease-in-out infinite;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .loading-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--text-soft);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .site-footer {
+      text-align: center;
+      padding: 2rem 1.5rem 2.5rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .site-footer .separator {
+      margin: 0 0.6em;
+      opacity: 0.4;
+    }
+
+    /* ============================================================
+       UTILITY CLASSES
+    ============================================================ */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 600px) {
+      .hero { padding: 3.5rem 1.25rem 2rem; }
+      .daily-card { padding: 1.75rem; }
+      .prompts-grid { grid-template-columns: 1fr; }
+      .topics-grid { grid-template-columns: repeat(2, 1fr); }
+      .search-footer { flex-direction: column; align-items: stretch; }
+      .search-btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-brand" aria-label="The Sanctuary — home">
+      <div class="nav-brand-icon" aria-hidden="true">✦</div>
+      <span class="nav-brand-name">The Sanctuary</span>
+    </a>
+    <div class="nav-actions">
+      <button class="nav-btn active" id="nav-home" onclick="showPage('home')" aria-label="Home — find scripture">🏠</button>
+      <button class="nav-btn" id="nav-daily" onclick="showPage('daily')" aria-label="Daily verse and topics">☀️</button>
+      <button class="nav-btn" id="nav-notes" onclick="showPage('notes')" aria-label="My saved notes">📖</button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       PAGE: HOME (SEARCH)
+  ============================================================ -->
+  <section class="page active" id="page-home" aria-label="Search scripture">
+    <div class="hero">
+      <div class="hero-eyebrow" aria-hidden="true">
+        <span>✦</span>
+        Find peace, hope, and guidance
+      </div>
+      <h1 class="hero-headline">
+        What's weighing on your <em>heart today?</em>
+      </h1>
+      <p class="hero-sub">
+        Share what you're going through and discover words of comfort, hope, and wisdom — drawn from thousands of years of scripture.
+      </p>
+      <p class="hero-inclusive">
+        Whether you've followed faith your whole life or you're just beginning to explore…
+      </p>
+
+      <div class="search-card" role="search">
+        <label for="search-input" class="sr-only">Describe what you're feeling or going through</label>
+        <textarea
+          id="search-input"
+          class="search-textarea"
+          placeholder="e.g. I'm feeling anxious about the future and need reassurance…"
+          rows="3"
+          aria-label="Describe what you're feeling or going through"
+        ></textarea>
+        <div class="search-footer">
+          <p class="search-hint">Press Enter or click Seek Guidance</p>
+          <button class="search-btn" onclick="seekGuidance()" aria-label="Seek scripture guidance">
+            <span aria-hidden="true">✦</span> Seek Guidance
+          </button>
+        </div>
+      </div>
+
+      <p class="trust-bar">
+        Free <span aria-hidden="true">•</span> No account required <span aria-hidden="true">•</span> Private
+      </p>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Example prompts -->
+    <div class="prompts-section">
+      <p class="prompts-label">Try these prompts</p>
+      <div class="prompts-grid" role="list">
+        <button class="prompt-chip" role="listitem" onclick="usePrompt(this.textContent)" aria-label="Use prompt: I'm feeling anxious about the future">
+          I'm feeling anxious about the future
+        </button>
+        <button class="prompt-chip" role="listitem" onclick="usePrompt(this.textContent)" aria-label="Use prompt: I've lost someone I love and need comfort">
+          I've lost someone I love and need comfort
+        </button>
+        <button class="prompt-chip" role="listitem" onclick="usePrompt(this.textContent)" aria-label="Use prompt: I'm struggling to forgive someone">
+          I'm struggling to forgive someone
+        </button>
+        <button class="prompt-chip" role="listitem" onclick="usePrompt(this.textContent)" aria-label="Use prompt: I feel lonely and disconnected">
+          I feel lonely and disconnected
+        </button>
+        <button class="prompt-chip" role="listitem" onclick="usePrompt(this.textContent)" aria-label="Use prompt: I'm going through a big life transition">
+          I'm going through a big life transition
+        </button>
+        <button class="prompt-chip" role="listitem" onclick="usePrompt(this.textContent)" aria-label="Use prompt: I want to find more meaning and purpose in my everyday life">
+          I want to find more meaning and purpose in my everyday life
+        </button>
+      </div>
+    </div>
+
+    <!-- Feel pills -->
+    <div class="feel-section">
+      <p class="feel-label">How are you feeling?</p>
+      <div class="feel-pills" role="list">
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel anxious">Anxious</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel hopeful">Hopeful</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel lost">Lost</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel grateful">Grateful</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel afraid">Afraid</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel joyful">Joyful</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel angry">Angry</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel overwhelmed">Overwhelmed</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel burned out">Burned Out</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel heartbroken">Heartbroken</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel at peace">At Peace</button>
+        <button class="feel-pill" role="listitem" onclick="usePrompt('I feel ' + this.textContent.toLowerCase())" aria-label="I feel doubtful">Doubtful</button>
+      </div>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+      The Sanctuary — A place for stillness, guidance, and hope.
+      <span class="separator">|</span>
+      Made with care ♥
+    </footer>
+  </section>
+
+  <!-- ============================================================
+       PAGE: RESULTS
+  ============================================================ -->
+  <section class="page" id="page-results" aria-label="Scripture results" aria-live="polite">
+    <div class="results-header">
+      <button class="back-btn" onclick="showPage('home')" aria-label="Return to search">
+        ← Back to Search
+      </button>
+      <p class="results-query-label">Seeking guidance for</p>
+      <div class="results-query-text" id="results-query-display"></div>
+      <p class="results-count" id="results-count-display"></p>
+    </div>
+    <div class="results-grid" id="results-container" role="list"></div>
+  </section>
+
+  <!-- ============================================================
+       PAGE: DAILY VERSE
+  ============================================================ -->
+  <section class="page" id="page-daily" aria-label="Daily verse and topics">
+    <div class="daily-page">
+      <p class="daily-eyebrow">Daily Scripture</p>
+      <p class="daily-date" id="daily-date-display"></p>
+
+      <div class="daily-card" id="daily-card">
+        <div class="daily-verse-text" id="daily-verse-text">Loading today's verse…</div>
+        <div class="daily-verse-ref" id="daily-verse-ref"></div>
+        <div class="daily-divider" aria-hidden="true"></div>
+        <div class="daily-reflection" id="daily-reflection"></div>
+      </div>
+
+      <button class="daily-share-btn" onclick="shareVerse()" aria-label="Share this verse">
+        <span aria-hidden="true">↗</span> Share this verse
+      </button>
+
+      <!-- Topic Browser -->
+      <div class="topics-section" id="daily-topics-section">
+        <p class="section-eyebrow">Browse by topic</p>
+        <div class="topics-grid" id="topics-grid" role="list"></div>
+      </div>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+      The Sanctuary — A place for stillness, guidance, and hope.
+      <span class="separator">|</span>
+      Made with care ♥
+    </footer>
+  </section>
+
+  <!-- ============================================================
+       PAGE: NOTES
+  ============================================================ -->
+  <section class="page" id="page-notes" aria-label="My saved notes">
+    <div class="notes-page">
+      <div class="notes-header">
+        <h1 class="notes-title">My Notes</h1>
+        <p class="notes-subtitle">Your personal collection of saved scripture.</p>
+      </div>
+      <div id="notes-container"></div>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+      The Sanctuary — A place for stillness, guidance, and hope.
+      <span class="separator">|</span>
+      Made with care ♥
+    </footer>
+  </section>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+  // ============================================================
+  // DATA — TOPICS
+  // ============================================================
+  const TOPICS = [
+    {
+      id: 'anxiety',
+      name: 'Anxiety & Fear',
+      icon: '🌊',
+      description: 'Finding peace when worry overwhelms',
+      verses: [
+        {
+          ref: 'Philippians 4:6-7',
+          text: 'Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.',
+          reflection: 'This promise reminds us that when we bring our worries to God with gratitude, a supernatural peace that defies human comprehension becomes our guardian.'
+        },
+        {
+          ref: 'Isaiah 41:10',
+          text: 'So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.',
+          reflection: 'These are words spoken directly from the heart of God — a personal promise of presence, strength, and steadfast support.'
+        },
+        {
+          ref: 'Matthew 6:34',
+          text: 'Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.',
+          reflection: 'Jesus invites us into the freedom of present-moment living, trusting that each day carries exactly what we need — not more, not less.'
+        },
+        {
+          ref: '1 Peter 5:7',
+          text: 'Cast all your anxiety on him because he cares for you.',
+          reflection: 'A beautifully simple invitation: you don\'t have to carry the weight. There is One who genuinely cares and invites us to release our burdens.'
+        }
+      ]
+    },
+    {
+      id: 'grief',
+      name: 'Grief & Loss',
+      icon: '🕊️',
+      description: 'Comfort in seasons of mourning',
+      verses: [
+        {
+          ref: 'Psalm 34:18',
+          text: 'The Lord is close to the brokenhearted and saves those who are crushed in spirit.',
+          reflection: 'Grief does not distance us from God — it draws Him near. This verse promises His closest presence precisely in our most shattered moments.'
+        },
+        {
+          ref: 'Matthew 5:4',
+          text: 'Blessed are those who mourn, for they will be comforted.',
+          reflection: 'Jesus doesn\'t promise we won\'t grieve; He promises that our grief will be met with divine comfort. Mourning is not weakness — it is the pathway to blessing.'
+        },
+        {
+          ref: 'Revelation 21:4',
+          text: 'He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain, for the old order of things has passed away.',
+          reflection: 'This ultimate promise gives our grief a horizon — not just survival, but restoration. Every tear matters, and each one will be personally wiped away.'
+        },
+        {
+          ref: 'Lamentations 3:22-23',
+          text: 'Because of the Lord\'s great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness.',
+          reflection: 'Written in the depths of devastation, these words testify that mercy is not a finite resource. Each morning brings a fresh supply.'
+        }
+      ]
+    },
+    {
+      id: 'hope',
+      name: 'Hope & Future',
+      icon: '⭐',
+      description: 'Anchoring yourself in what lies ahead',
+      verses: [
+        {
+          ref: 'Jeremiah 29:11',
+          text: 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.',
+          reflection: 'Even in exile, even in the hardest seasons, God holds an intentional plan for flourishing. Hope is not wishful thinking — it\'s grounded in His character.'
+        },
+        {
+          ref: 'Romans 8:28',
+          text: 'And we know that in all things God works for the good of those who love him, who have been called according to his purpose.',
+          reflection: 'The word "all" is breathtaking. Not just good things — all things. Even the painful chapters are being woven into something purposeful.'
+        },
+        {
+          ref: 'Isaiah 40:31',
+          text: 'But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.',
+          reflection: 'Hope is not passive waiting — it\'s an active exchange where our emptiness meets God\'s abundance, and strength is renewed like the eagle\'s flight.'
+        },
+        {
+          ref: 'Romans 15:13',
+          text: 'May the God of hope fill you with all joy and peace as you trust in him, so that you may overflow with hope by the power of the Holy Spirit.',
+          reflection: 'God is called the "God of hope" — hope is His very nature. When we trust Him, hope becomes not a trickle but an overflow.'
+        }
+      ]
+    },
+    {
+      id: 'strength',
+      name: 'Strength & Courage',
+      icon: '🏔️',
+      description: 'Standing firm when life is hard',
+      verses: [
+        {
+          ref: 'Philippians 4:13',
+          text: 'I can do all this through him who gives me strength.',
+          reflection: 'Written from prison, this is not triumphalism — it\'s hard-won testimony. Paul discovered that Christ\'s strength fills every crack of human weakness.'
+        },
+        {
+          ref: 'Joshua 1:9',
+          text: 'Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.',
+          reflection: 'Courage is not the absence of fear but the choice to act in the presence of fear, anchored by the certainty of God\'s unshakeable companionship.'
+        },
+        {
+          ref: '2 Corinthians 12:9',
+          text: 'My grace is sufficient for you, for my power is made perfect in weakness.',
+          reflection: 'Our inadequacy is not an obstacle to God — it\'s an invitation. His power finds its fullest expression precisely where we run out of our own.'
+        },
+        {
+          ref: 'Isaiah 40:29',
+          text: 'He gives strength to the weary and increases the power of the weak.',
+          reflection: 'The weary and weak are not forgotten — they are God\'s very target. Exhaustion and limitation are invitations to receive what only He can give.'
+        }
+      ]
+    },
+    {
+      id: 'forgiveness',
+      name: 'Forgiveness',
+      icon: '🤝',
+      description: 'The freedom of releasing what was done',
+      verses: [
+        {
+          ref: 'Colossians 3:13',
+          text: 'Bear with each other and forgive one another if any of you has a grievance against someone. Forgive as the Lord forgave you.',
+          reflection: 'Forgiveness is not pretending the wound didn\'t happen — it\'s choosing to release the debt, modeled on the extravagant forgiveness we ourselves have received.'
+        },
+        {
+          ref: 'Matthew 6:14-15',
+          text: 'For if you forgive other people when they sin against you, your heavenly Father will also forgive you. But if you do not forgive others their sins, your Father will not forgive your sins.',
+          reflection: 'Forgiveness flows in both directions. When we receive it, we become conduits. When we withhold it, the flow stops — in us.'
+        },
+        {
+          ref: 'Ephesians 4:32',
+          text: 'Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.',
+          reflection: 'The standard and the source are the same: Christ. His forgiveness is not the reward for forgiving others — it\'s the motivation and the model.'
+        },
+        {
+          ref: 'Luke 23:34',
+          text: 'Jesus said, "Father, forgive them, for they do not know what they are doing."',
+          reflection: 'From the cross itself, Jesus demonstrated the breathtaking reach of forgiveness — offered at the very moment of deepest injustice.'
+        }
+      ]
+    },
+    {
+      id: 'love',
+      name: 'Love & Relationships',
+      icon: '❤️',
+      description: 'Wisdom for loving and being loved',
+      verses: [
+        {
+          ref: '1 Corinthians 13:4-7',
+          text: 'Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.',
+          reflection: 'This is less a list of feelings and more a description of choices — love as a daily practice of character, patience, and generosity toward another soul.'
+        },
+        {
+          ref: '1 John 4:19',
+          text: 'We love because he first loved us.',
+          reflection: 'Human love is derivative. We don\'t generate love from our own resources — we channel what we\'ve first received. All love traces back to its source.'
+        },
+        {
+          ref: 'John 15:13',
+          text: 'Greater love has no one than this: to lay down one\'s life for one\'s friends.',
+          reflection: 'Jesus redefines greatness: not in what we achieve or acquire, but in what we willingly surrender for the sake of another.'
+        },
+        {
+          ref: 'Song of Solomon 8:7',
+          text: 'Many waters cannot quench love; rivers cannot sweep it away.',
+          reflection: 'True love has an inextinguishable quality — it is not conditional on circumstances, comfort, or outcome. Some things simply cannot be drowned.'
+        }
+      ]
+    },
+    {
+      id: 'wisdom',
+      name: 'Wisdom & Guidance',
+      icon: '💡',
+      description: 'Discernment for life\'s crossroads',
+      verses: [
+        {
+          ref: 'Proverbs 3:5-6',
+          text: 'Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.',
+          reflection: 'Our understanding has limits. This verse invites a posture of humble trust over confident self-reliance — and promises divine direction in return.'
+        },
+        {
+          ref: 'James 1:5',
+          text: 'If any of you lacks wisdom, you should ask God, who gives generously to all without finding fault, and it will be given to you.',
+          reflection: 'Wisdom is not achieved — it\'s received. And the Giver is described with extraordinary generosity: He gives freely, abundantly, without reproach.'
+        },
+        {
+          ref: 'Psalm 119:105',
+          text: 'Your word is a lamp for my feet, a light on my path.',
+          reflection: 'A lamp illuminates the next step, not the entire journey. God\'s guidance is often like this — enough light for where we are, calling us to trust for what lies ahead.'
+        },
+        {
+          ref: 'Isaiah 30:21',
+          text: 'Whether you turn to the right or to the left, your ears will hear a voice behind you, saying, "This is the way; walk in it."',
+          reflection: 'Divine guidance is not hidden — it\'s spoken. The challenge is learning to quiet ourselves enough to hear the voice that is already speaking.'
+        }
+      ]
+    },
+    {
+      id: 'gratitude',
+      name: 'Gratitude & Joy',
+      icon: '🌟',
+      description: 'Cultivating a thankful heart',
+      verses: [
+        {
+          ref: '1 Thessalonians 5:16-18',
+          text: 'Rejoice always, pray continually, give thanks in all circumstances; for this is God\'s will for you in Christ Jesus.',
+          reflection: 'Three habits. Three words each. These short commands describe an orientation of the soul toward God — not dependent on circumstances, but anchored in who He is.'
+        },
+        {
+          ref: 'Psalm 100:4',
+          text: 'Enter his gates with thanksgiving and his courts with praise; give thanks to him and praise his name.',
+          reflection: 'Gratitude is not just a pleasant feeling — it\'s a way of entering God\'s presence. Thanksgiving is the threshold between ordinary life and the sacred.'
+        },
+        {
+          ref: 'Philippians 4:4',
+          text: 'Rejoice in the Lord always. I will say it again: Rejoice!',
+          reflection: 'The repetition is intentional — and tender. Paul knows we need to hear it twice. Joy is not a feeling we wait for; it\'s a decision we make toward God.'
+        },
+        {
+          ref: 'James 1:17',
+          text: 'Every good and perfect gift is from above, coming down from the Father of the heavenly lights, who does not change like shifting shadows.',
+          reflection: 'When we practice naming good things, we are practicing theology — tracing gifts back to their Source, and discovering how generous that Source truly is.'
+        }
+      ]
+    }
+  ];
+
+  // ============================================================
+  // DATA — DAILY VERSES
+  // ============================================================
+  const DAILY = [
+    {
+      ref: 'Psalm 46:10',
+      text: 'Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.',
+      reflection: 'In a world of relentless noise and motion, this is a radical invitation. Stillness is not emptiness — it is the fertile ground where we encounter the divine.'
+    },
+    {
+      ref: 'John 14:27',
+      text: 'Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.',
+      reflection: 'There is a peace on offer that the world cannot manufacture, market, or take away. It was purchased at great cost and given with extraordinary generosity.'
+    },
+    {
+      ref: 'Lamentations 3:22-23',
+      text: 'Because of the Lord\'s great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness.',
+      reflection: 'Every morning is a fresh beginning, not just a continuation. Mercy arrives renewed, not rationed. Today carries no deficit from yesterday.'
+    },
+    {
+      ref: 'Romans 8:38-39',
+      text: 'For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.',
+      reflection: 'Paul surveys the entire cosmos — time, space, spiritual powers — and finds nothing that can break this bond. Love like this is not fragile; it is the most durable thing in existence.'
+    },
+    {
+      ref: 'Psalm 23:1',
+      text: 'The Lord is my shepherd; I shall not want.',
+      reflection: 'Six words that have steadied millions of souls across centuries. In declaring God as Shepherd, we declare ourselves tended, guided, and provided for.'
+    },
+    {
+      ref: 'Matthew 11:28-29',
+      text: 'Come to me, all you who are weary and burdened, and I will give you rest. Take my yoke upon you and learn from me, for I am gentle and humble in heart, and you will find rest for your souls.',
+      reflection: 'This is perhaps the most tender invitation in all of scripture. Weariness is not a disqualification — it\'s the very qualification Jesus is looking for.'
+    },
+    {
+      ref: 'Proverbs 31:25',
+      text: 'She is clothed with strength and dignity; she can laugh at the days to come.',
+      reflection: 'True confidence is not the absence of uncertainty — it\'s the ability to laugh in the face of an unknown future, clothed in something that cannot be taken away.'
+    }
+  ];
+
+  // ============================================================
+  // DATA — FALLBACK VERSE SETS (keyword-based)
+  // ============================================================
+  const FALLBACKS = {
+    anxious: 'anxiety',
+    worry: 'anxiety',
+    worried: 'anxiety',
+    stressed: 'anxiety',
+    fear: 'anxiety',
+    afraid: 'anxiety',
+    grief: 'grief',
+    loss: 'grief',
+    death: 'grief',
+    mourning: 'grief',
+    sad: 'grief',
+    lonely: 'grief',
+    hope: 'hope',
+    future: 'hope',
+    purpose: 'hope',
+    meaning: 'hope',
+    direction: 'hope',
+    transition: 'hope',
+    tired: 'strength',
+    exhausted: 'strength',
+    strength: 'strength',
+    courage: 'strength',
+    weak: 'strength',
+    difficult: 'strength',
+    hard: 'strength',
+    burned: 'strength',
+    burnout: 'strength',
+    overwhelmed: 'anxiety',
+    forgive: 'forgiveness',
+    forgiveness: 'forgiveness',
+    resentment: 'forgiveness',
+    hurt: 'forgiveness',
+    betrayal: 'forgiveness',
+    love: 'love',
+    relationship: 'love',
+    marriage: 'love',
+    family: 'love',
+    heartbroken: 'grief',
+    heartbreak: 'grief',
+    wisdom: 'wisdom',
+    decision: 'wisdom',
+    guidance: 'wisdom',
+    confused: 'wisdom',
+    unsure: 'wisdom',
+    grateful: 'gratitude',
+    gratitude: 'gratitude',
+    thankful: 'gratitude',
+    joy: 'gratitude',
+    happy: 'gratitude',
+    blessed: 'gratitude'
+  };
+
+  // ============================================================
+  // STATE
+  // ============================================================
+  let notes = JSON.parse(localStorage.getItem('sanctuary-notes') || '[]');
+
+  // ============================================================
+  // PAGE NAVIGATION
+  // ============================================================
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+    document.getElementById('page-' + name).classList.add('active');
+    document.getElementById('nav-' + name)?.classList.add('active');
+
+    if (name === 'daily') renderDailyPage();
+    if (name === 'notes') renderNotes();
+    if (name === 'results') {
+      document.getElementById('nav-home').classList.add('active');
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ============================================================
+  // SEARCH & RESULTS
+  // ============================================================
+  function seekGuidance() {
+    const query = document.getElementById('search-input').value.trim();
+    if (!query) {
+      showToast('Please share something on your heart first.');
+      document.getElementById('search-input').focus();
+      return;
+    }
+    renderResults(query);
+    showPage('results');
+  }
+
+  function usePrompt(text) {
+    const trimmed = text.trim();
+    document.getElementById('search-input').value = trimmed;
+    renderResults(trimmed);
+    showPage('results');
+  }
+
+  function renderResults(query) {
+    document.getElementById('results-query-display').textContent = query;
+
+    const lower = query.toLowerCase();
+    let verses = [];
+    let topicName = '';
+
+    // Find best matching topic
+    for (const [keyword, topicId] of Object.entries(FALLBACKS)) {
+      if (lower.includes(keyword)) {
+        const topic = TOPICS.find(t => t.id === topicId);
+        if (topic) {
+          verses = topic.verses;
+          topicName = topic.name;
+          break;
+        }
+      }
+    }
+
+    // Fallback: pick based on query length mod topics
+    if (!verses.length) {
+      const idx = query.length % TOPICS.length;
+      verses = TOPICS[idx].verses;
+      topicName = TOPICS[idx].name;
+    }
+
+    document.getElementById('results-count-display').textContent =
+      `${verses.length} verses found · Theme: ${topicName}`;
+
+    const container = document.getElementById('results-container');
+    container.innerHTML = verses.map((v, i) => `
+      <div class="verse-card" role="listitem">
+        <div class="verse-ref">${escHtml(v.ref)}</div>
+        <div class="verse-text">"${escHtml(v.text)}"</div>
+        <div class="verse-reflection">${escHtml(v.reflection)}</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="saveNote(${JSON.stringify(v).replace(/"/g, '&quot;')})" aria-label="Save ${v.ref} to my notes">
+            <span aria-hidden="true">📌</span> Save to Notes
+          </button>
+          <button class="verse-action-btn" onclick="copyVerse(${i}, ${JSON.stringify(v.ref).replace(/"/g, '&quot;')}, ${JSON.stringify(v.text).replace(/"/g, '&quot;')})" aria-label="Copy ${v.ref}">
+            <span aria-hidden="true">📋</span> Copy
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function copyVerse(idx, ref, text) {
+    const str = `"${text}" — ${ref}`;
+    navigator.clipboard.writeText(str).then(() => showToast('Verse copied to clipboard'));
+  }
+
+  // ============================================================
+  // DAILY VERSE PAGE
+  // ============================================================
+  function renderDailyPage() {
+    // Date display
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('daily-date-display').textContent = dateStr;
+
+    // Pick verse deterministically by day of year
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
+    const verse = DAILY[dayOfYear % DAILY.length];
+
+    document.getElementById('daily-verse-text').textContent = `"${verse.text}"`;
+    document.getElementById('daily-verse-ref').textContent = verse.ref;
+    document.getElementById('daily-reflection').textContent = verse.reflection;
+
+    // Topics grid
+    const grid = document.getElementById('topics-grid');
+    grid.innerHTML = TOPICS.map(t => `
+      <button class="topic-btn" role="listitem" onclick="loadTopic('${t.id}')" aria-label="Browse ${t.name} verses">
+        <span class="topic-icon" aria-hidden="true">${t.icon}</span>
+        <span class="topic-name">${escHtml(t.name)}</span>
+        <span class="topic-count">${t.verses.length} verses</span>
+      </button>
+    `).join('');
+  }
+
+  function loadTopic(topicId) {
+    const topic = TOPICS.find(t => t.id === topicId);
+    if (!topic) return;
+    document.getElementById('search-input').value = topic.name;
+    renderResults(topic.name);
+    showPage('results');
+  }
+
+  // ============================================================
+  // SHARE VERSE (Web Share API with clipboard fallback)
+  // ============================================================
+  async function shareVerse() {
+    const text = document.getElementById('daily-verse-text').textContent;
+    const ref  = document.getElementById('daily-verse-ref').textContent;
+    const shareText = `${text} — ${ref}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'The Sanctuary — Daily Scripture',
+          text: shareText,
+          url: 'https://soopray.github.io/the-sanctuary/'
+        });
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          fallbackCopy(shareText);
+        }
+      }
+    } else {
+      fallbackCopy(shareText);
+    }
+  }
+
+  function fallbackCopy(str) {
+    navigator.clipboard.writeText(str)
+      .then(() => showToast('Verse copied to clipboard'))
+      .catch(() => showToast('Could not copy — please copy manually'));
+  }
+
+  // ============================================================
+  // NOTES
+  // ============================================================
+  function saveNote(verse) {
+    const existing = notes.find(n => n.ref === verse.ref);
+    if (existing) { showToast('Already saved to your notes'); return; }
+    notes.unshift({ ...verse, savedAt: new Date().toISOString() });
+    localStorage.setItem('sanctuary-notes', JSON.stringify(notes));
+    showToast(`Saved: ${verse.ref}`);
+  }
+
+  function removeNote(ref) {
+    notes = notes.filter(n => n.ref !== ref);
+    localStorage.setItem('sanctuary-notes', JSON.stringify(notes));
+    renderNotes();
+    showToast('Note removed');
+  }
+
+  function renderNotes() {
+    const container = document.getElementById('notes-container');
+
+    if (!notes.length) {
+      container.innerHTML = `
+        <div class="notes-empty" role="status">
+          <div class="notes-empty-icon" aria-hidden="true">📖</div>
+          <div class="notes-empty-title">Your journal is empty</div>
+          <p class="notes-empty-sub">Save a verse from any section and it will appear here — your personal scripture journal.</p>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = `<div class="notes-list" role="list">` + notes.map(n => `
+      <div class="note-card" role="listitem">
+        <div class="note-ref">${escHtml(n.ref)}</div>
+        <div class="note-text">"${escHtml(n.text)}"</div>
+        <div class="note-meta">Saved ${formatDate(n.savedAt)}</div>
+        <button class="note-remove" onclick="removeNote(${JSON.stringify(n.ref).replace(/"/g, '&quot;')})" aria-label="Remove ${n.ref} from notes">✕</button>
+      </div>
+    `).join('') + `</div>`;
+  }
+
+  // ============================================================
+  // TOAST
+  // ============================================================
+  let toastTimer;
+  function showToast(message) {
+    const el = document.getElementById('toast');
+    el.textContent = message;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+  }
+
+  // ============================================================
+  // KEYBOARD SHORTCUT — Enter to search
+  // ============================================================
+  document.getElementById('search-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      seekGuidance();
+    }
+  });
+
+  // ============================================================
+  // UTILITIES
+  // ============================================================
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function formatDate(iso) {
+    try {
+      return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    } catch { return ''; }
+  }
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  (function init() {
+    // Pre-render daily date so it's ready when nav switches
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('daily-date-display').textContent = dateStr;
+  })();
+  </script>
+</body>
+</html>
